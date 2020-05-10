@@ -13,6 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Loader from "./components/Loader";
 import Copyright from "./components/Copyright";
 import Routes from "./navigation/Routes";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  content: {
-  }
 }));
 
 function Page() {
@@ -49,17 +48,23 @@ function Page() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {t("app")}
+            <Link color="inherit" href="/" underline='none'>
+              {t("app")}
+            </Link>{" "}
           </Typography>
-          <Button color="inherit">{t("account.signup")}</Button>
-          <Button color="inherit">{t("account.login")}</Button>
+          <Button color="inherit" href="/signup">
+            {t("account.signup")}
+          </Button>
+          <Button color="inherit" href="/login">
+            {t("account.login")}
+          </Button>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="lg" className={classes.content}>
+      <Container maxWidth="lg">
         <Routes />
         <Box pt={4}>
-          <Copyright/>
-          </Box>
+          <Copyright />
+        </Box>
       </Container>
     </div>
   );
