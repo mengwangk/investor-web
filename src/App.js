@@ -24,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Page() {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Set document title
+  document.title = i18n.t("app")
 
   return (
     <div className={classes.root}>
