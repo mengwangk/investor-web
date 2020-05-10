@@ -6,9 +6,12 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
+import Container from "@material-ui/core/Container";
 import MenuIcon from "@material-ui/icons/Menu";
 import Loader from "./components/Loader";
+import Copyright from "./components/Copyright";
 import Routes from "./navigation/Routes";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  content: {
+  }
 }));
 
 function Page() {
@@ -28,7 +33,7 @@ function Page() {
   const { t, i18n } = useTranslation();
 
   // Set document title
-  document.title = i18n.t("app")
+  document.title = i18n.t("app");
 
   return (
     <div className={classes.root}>
@@ -50,7 +55,12 @@ function Page() {
           <Button color="inherit">{t("account.login")}</Button>
         </Toolbar>
       </AppBar>
-      <Routes /> 
+      <Container maxWidth="lg" className={classes.content}>
+        <Routes />
+        <Box pt={4}>
+          <Copyright/>
+          </Box>
+      </Container>
     </div>
   );
 }

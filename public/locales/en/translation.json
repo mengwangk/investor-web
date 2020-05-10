@@ -6,5 +6,10 @@
     "signup": "Signup",
     "login": "Login",
     "logout": "Logout"
+  },
+  "copyright": {
+    "text": "Copyright © ",
+    "description": "mengwangk",
+    "link": "https://github.com/mengwangk/investor"
   }
 }
