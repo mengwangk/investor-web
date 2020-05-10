@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Loader from "./components/Loader";
+import Routes from "./navigation/Routes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,6 +50,7 @@ function Page() {
           <Button color="inherit">{t("account.login")}</Button>
         </Toolbar>
       </AppBar>
+      <Routes /> 
     </div>
   );
 }
