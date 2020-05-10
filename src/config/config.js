@@ -1,8 +1,9 @@
 const dev = {
-    
+  DEBUG: true,
 };
 
 const prod = {
+  DEBUG: false,
 };
 
 // Default to dev if not set
