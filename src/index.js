@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./i18n";
+import "./i18n/i18n";
 import { Amplify } from "aws-amplify";
 import config from "./config/config";
 
