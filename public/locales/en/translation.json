@@ -11,5 +11,10 @@
     "text": "Copyright © ",
     "description": "mengwangk",
     "link": "https://github.com/mengwangk/investor"
+  },
+  "msg": {
+  },
+  "error": {
+    "pageNotFound": "Sorry, page not found!"
   }
 }
