@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-const Loader = ({ isLoading, error }) => {
+export default function Loader({ isLoading, error }) {
+  const { t } = useTranslation();
+
   // Handle the loading state
   if (isLoading) {
     return <div>Loading...</div>;
@@ -11,6 +14,4 @@ const Loader = ({ isLoading, error }) => {
   } else {
     return null;
   }
-};
-
-export default Loader;
+}
