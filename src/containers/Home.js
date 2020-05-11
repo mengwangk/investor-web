@@ -11,7 +11,7 @@ export default function Home() {
       <div className="lander">
         <h1>{t("app")}</h1>
         <p>{t("description")}</p>
-        <LoaderButton size="large" color="primary" variant="contained">Test</LoaderButton>
+        <LoaderButton size="large" isLoading="true" color="primary" variant="contained">Test</LoaderButton>
       </div>
     </div>
   );
