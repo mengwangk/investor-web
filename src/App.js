@@ -14,6 +14,7 @@ import Loader from "./components/Loader";
 import Copyright from "./components/Copyright";
 import Routes from "./navigation/Routes";
 import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,14 +49,14 @@ function Page() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <Link color="inherit" href="/" underline='none'>
+            <Link color="inherit" component={RouterLink} to="/" underline="none">
               {t("app")}
             </Link>{" "}
           </Typography>
-          <Button color="inherit" href="/signup">
+          <Button color="inherit" component={RouterLink} to="/signup">
             {t("account.signup")}
           </Button>
-          <Button color="inherit" href="/login">
+          <Button color="inherit" component={RouterLink} to="/login">
             {t("account.login")}
           </Button>
         </Toolbar>
