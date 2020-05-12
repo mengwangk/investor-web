@@ -11,6 +11,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useTranslation } from "react-i18next";
+import { Auth } from "aws-amplify";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const { t} = useTranslation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,7 +59,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,6 +70,9 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -77,6 +83,8 @@ export default function Login() {
             label="Password"
             type="password"
             id="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             autoComplete="current-password"
           />
           <FormControlLabel
@@ -88,6 +96,7 @@ export default function Login() {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={!validateForm()}
             className={classes.submit}
           >
             Sign In
