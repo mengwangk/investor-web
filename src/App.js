@@ -54,7 +54,7 @@ function Page() {
             </Link>{" "}
           </Typography>
           <Button color="inherit" component={RouterLink} to="/signup">
-            {t("account.signup")}
+            {t("account.register")}
           </Button>
           <Button color="inherit" component={RouterLink} to="/login">
             {t("account.login")}

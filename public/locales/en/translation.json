@@ -3,7 +3,7 @@
   "description": "Investment app.",
   "account": {
     "profile": "Profile",
-    "signup": "Signup",
+    "register": "Register",
     "login": "Login",
     "logout": "Logout"
   },
@@ -16,5 +16,13 @@
   },
   "error": {
     "pageNotFound": "Sorry, page not found!"
+  },
+  "login": {
+    "email" : "Email Address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signup": "Don't have an account? Sign Up"
   }
+  
 }

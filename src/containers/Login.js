@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
-  const { t} = useTranslation();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,8 +45,15 @@ export default function Login() {
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+
+    try {
+      await Auth.signIn(email, password);
+      alert("Logged in");
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   return (
@@ -57,7 +64,7 @@ export default function Login() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {t("account.login")}
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
@@ -66,13 +73,13 @@ export default function Login() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={t("login.email")}
             name="email"
             autoComplete="email"
             autoFocus
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -80,16 +87,16 @@ export default function Login() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={t("login.password")}
             type="password"
             id="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label={t("login.rememberMe")}
           />
           <Button
             type="submit"
@@ -99,17 +106,17 @@ export default function Login() {
             disabled={!validateForm()}
             className={classes.submit}
           >
-            Sign In
+            {t("account.login")}
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+              <Link href="/login/reset" variant="body2">
+                {t("login.forgotPassword")}
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="/signup" variant="body2">
+                {t("login.signup")}
               </Link>
             </Grid>
           </Grid>
