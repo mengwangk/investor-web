@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,6 +16,7 @@ import Routes from "./navigation/Routes";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 import { AppContext } from "./libs/contextLib";
+import { Auth } from "aws-amplify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,63 +34,87 @@ function Page() {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
 
   // Set document title
   document.title = i18n.t("app");
 
-  function handleLogout() {
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    } catch (e) {
+      if (e !== "No current user") {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
+
+  async function handleLogout() {
+    await Auth.signOut();
+  
     userHasAuthenticated(false);
   }
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <Link
+    !isAuthenticating && (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
               color="inherit"
-              component={RouterLink}
-              to="/"
-              underline="none"
+              aria-label="menu"
             >
-              {t("app")}
-            </Link>{" "}
-          </Typography>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              <Link
+                color="inherit"
+                component={RouterLink}
+                to="/"
+                underline="none"
+              >
+                {t("app")}
+              </Link>{" "}
+            </Typography>
 
-          {isAuthenticated ? (
-            <Button color="inherit" onClick={handleLogout}>
-              {t("account.logout")}
-            </Button>
-          ) : (
-            <>
-              <Button color="inherit" component={RouterLink} to="/signup">
-                {t("account.register")}
+            {isAuthenticated ? (
+              <Button color="inherit" onClick={handleLogout}>
+                {t("account.logout")}
               </Button>
-              <Button color="inherit" component={RouterLink} to="/login">
-                {t("account.login")}
-              </Button>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-      <Container maxWidth="lg">
-        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-          <Routes />
-        </AppContext.Provider>
-        <Box pt={4}>
-          <Copyright />
-        </Box>
-      </Container>
-    </div>
+            ) : (
+              <>
+                <Button color="inherit" component={RouterLink} to="/signup">
+                  {t("account.register")}
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/login">
+                  {t("account.login")}
+                </Button>
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+        <Container maxWidth="lg">
+          <AppContext.Provider
+            value={{ isAuthenticated, userHasAuthenticated }}
+          >
+            <Routes />
+          </AppContext.Provider>
+          <Box pt={4}>
+            <Copyright />
+          </Box>
+        </Container>
+      </div>
+    )
   );
 }
 
