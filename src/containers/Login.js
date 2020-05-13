@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
 import { Auth } from "aws-amplify";
+import { useAppContext } from "../libs/contextLib";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  const { userHasAuthenticated } = useAppContext();
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -50,7 +52,7 @@ export default function Login() {
 
     try {
       await Auth.signIn(email, password);
-      alert("Logged in");
+      userHasAuthenticated(true);
     } catch (e) {
       alert(e.message);
     }

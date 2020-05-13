@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,6 +15,7 @@ import Copyright from "./components/Copyright";
 import Routes from "./navigation/Routes";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
+import { AppContext } from "./libs/contextLib";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,9 +32,14 @@ const useStyles = makeStyles((theme) => ({
 function Page() {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
 
   // Set document title
   document.title = i18n.t("app");
+
+  function handleLogout() {
+    userHasAuthenticated(false);
+  }
 
   return (
     <div className={classes.root}>
@@ -49,20 +55,36 @@ function Page() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <Link color="inherit" component={RouterLink} to="/" underline="none">
+            <Link
+              color="inherit"
+              component={RouterLink}
+              to="/"
+              underline="none"
+            >
               {t("app")}
             </Link>{" "}
           </Typography>
-          <Button color="inherit" component={RouterLink} to="/signup">
-            {t("account.register")}
-          </Button>
-          <Button color="inherit" component={RouterLink} to="/login">
-            {t("account.login")}
-          </Button>
+
+          {isAuthenticated ? (
+            <Button color="inherit" onClick={handleLogout}>
+              {t("account.logout")}
+            </Button>
+          ) : (
+            <>
+              <Button color="inherit" component={RouterLink} to="/signup">
+                {t("account.register")}
+              </Button>
+              <Button color="inherit" component={RouterLink} to="/login">
+                {t("account.login")}
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <Container maxWidth="lg">
-        <Routes />
+        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <Routes />
+        </AppContext.Provider>
         <Box pt={4}>
           <Copyright />
         </Box>
