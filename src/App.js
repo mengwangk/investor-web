@@ -14,7 +14,7 @@ import Loader from "./components/Loader";
 import Copyright from "./components/Copyright";
 import Routes from "./navigation/Routes";
 import Link from "@material-ui/core/Link";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 
@@ -35,6 +35,7 @@ function Page() {
   const { t, i18n } = useTranslation();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const history = useHistory();
 
   // Set document title
   document.title = i18n.t("app");
@@ -60,6 +61,7 @@ function Page() {
     await Auth.signOut();
   
     userHasAuthenticated(false);
+    history.push("/login");
   }
 
   return (

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -14,6 +13,9 @@ import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
+import { useHistory } from "react-router-dom";
+import LoaderButton from "../components/LoaderButton";
+import ErrorAlert from "../components/ErrorAlert";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,9 +38,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const { userHasAuthenticated } = useAppContext();
   const classes = useStyles();
   const { t } = useTranslation();
+  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,12 +53,16 @@ export default function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+  
+    setIsLoading(true);
+  
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
+      history.push("/");
     } catch (e) {
-      alert(e.message);
+      ErrorAlert(e.message);
+      setIsLoading(false);
     }
   }
 
@@ -100,16 +108,17 @@ export default function Login() {
             control={<Checkbox value="remember" color="primary" />}
             label={t("login.rememberMe")}
           />
-          <Button
+          <LoaderButton
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             disabled={!validateForm()}
             className={classes.submit}
+            isLoading={isLoading}
           >
             {t("account.login")}
-          </Button>
+          </LoaderButton>
           <Grid container>
             <Grid item xs>
               <Link href="/login/reset" variant="body2">
