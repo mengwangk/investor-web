@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -12,
     marginLeft: -12,
   },
+  button: {
+    margin: theme.spacing(1),
+  },
 }));
 
 export default function LoaderButton({
@@ -22,7 +25,11 @@ export default function LoaderButton({
 
   return (
     <div className={classes.wrapper}>
-      <Button disabled={disabled || isLoading} {...props}>
+      <Button
+        disabled={disabled || isLoading}
+        className={classes.button}
+        {...props}
+      >
         {isLoading && (
           <CircularProgress size={24} className={classes.buttonProgress} />
         )}

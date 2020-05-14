@@ -15,7 +15,6 @@ import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
-import ErrorAlert from "../components/ErrorAlert";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,7 +60,7 @@ export default function Login() {
       userHasAuthenticated(true);
       history.push("/");
     } catch (e) {
-      ErrorAlert(e.message);
+      // ErrorAlert(e.message);
       setIsLoading(false);
     }
   }
