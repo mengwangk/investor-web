@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ErrorAlert(error) {
+export default function ErrorAlert({ error }) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   let message = error.toString();

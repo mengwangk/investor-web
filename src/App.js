@@ -17,6 +17,7 @@ import Link from "@material-ui/core/Link";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
+import ErrorAlert from "./components/ErrorAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,6 +110,7 @@ function Page() {
           <AppContext.Provider
             value={{ isAuthenticated, userHasAuthenticated }}
           >
+            <ErrorAlert error="asdd"/>
             <Routes />
           </AppContext.Provider>
           <Box pt={4}>
