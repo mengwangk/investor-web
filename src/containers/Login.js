@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
-import { useHistory } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -46,7 +46,7 @@ export default function Login() {
   const history = useHistory();
   const [fields, handleFieldChange] = useFormFields({
     email: "",
-    password: ""
+    password: "",
   });
 
   function validateForm() {
@@ -123,12 +123,12 @@ export default function Login() {
           </LoaderButton>
           <Grid container>
             <Grid item xs>
-              <Link href="/login/reset" variant="body2">
+              <Link to="/login/reset" component={RouterLink} variant="body2">
                 {t("login.forgotPassword")}
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link to="/signup" component={RouterLink} variant="body2">
                 {t("login.signup")}
               </Link>
             </Grid>
