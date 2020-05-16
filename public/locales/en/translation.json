@@ -26,6 +26,7 @@
     "email" : "Email Address",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "signup": "Register"
+    "signup": "Register",
+    "alreadyHaveAccount": "Already have an account? Sign in"
   }
 }

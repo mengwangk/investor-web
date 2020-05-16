@@ -5,7 +5,6 @@ import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -108,6 +107,8 @@ export default function Signup() {
                   autoComplete="email"
                   type="email"
                   autoFocus
+                  value={fields.email}
+                  onChange={handleFieldChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,6 +121,8 @@ export default function Signup() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  value={fields.password}
+                  onChange={handleFieldChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -132,22 +135,24 @@ export default function Signup() {
                   type="password"
                   id="confirmPassword"
                   autoComplete="current-password"
+                  onChange={handleFieldChange}
+                  value={fields.confirmPassword}
                 />
               </Grid>
             </Grid>
-            <Button
+            <LoaderButton
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
             >
-            {t("signup.signup")}
-            </Button>
+              {t("signup.signup")}
+            </LoaderButton>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  {t("signup.alreadyHaveAccount")}
                 </Link>
               </Grid>
             </Grid>
