@@ -3,7 +3,7 @@
   "description": "Investment app.",
   "account": {
     "profile": "Profile",
-    "register": "Register",
+    "signup": "Register",
     "login": "Login",
     "logout": "Logout"
   },
@@ -11,8 +11,6 @@
     "text": "Copyright © ",
     "description": "mengwangk",
     "link": "https://github.com/mengwangk/investor"
-  },
-  "msg": {
   },
   "error": {
     "pageNotFound": "Sorry, page not found!"
@@ -23,6 +21,11 @@
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
     "signup": "Don't have an account? Sign Up"
+  },
+  "signup": {
+    "email" : "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signup": "Register"
   }
-  
 }

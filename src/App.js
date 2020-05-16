@@ -97,7 +97,7 @@ function Page() {
             ) : (
               <>
                 <Button color="inherit" component={RouterLink} to="/signup">
-                  {t("account.register")}
+                  {t("account.signup")}
                 </Button>
                 <Button color="inherit" component={RouterLink} to="/login">
                   {t("account.login")}
