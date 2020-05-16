@@ -17,6 +17,7 @@ import Link from "@material-ui/core/Link";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
+import { onError } from "./libs/errorLib";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +51,7 @@ function Page() {
       userHasAuthenticated(true);
     } catch (e) {
       if (e !== "No current user") {
-        alert(e);
+        onError(e);
       }
     }
 

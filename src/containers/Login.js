@@ -15,6 +15,7 @@ import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
+import { onError } from "../libs/errorLib";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,15 +53,15 @@ export default function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-  
+
     setIsLoading(true);
-  
+
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
       history.push("/");
     } catch (e) {
-      // ErrorAlert(e.message);
+      onError(e.message);
       setIsLoading(false);
     }
   }
