@@ -16,6 +16,7 @@ import { useAppContext } from "../libs/contextLib";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
+import { useFormFields } from "../libs/hooksLib";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,11 +39,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState(false);
-  const { userHasAuthenticated } = useAppContext();
   const classes = useStyles();
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+  const { userHasAuthenticated } = useAppContext();
   const history = useHistory();
+  const [fields, handleFieldChange] = useFormFields({
+    email: "",
+    password: ""
+  });
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
