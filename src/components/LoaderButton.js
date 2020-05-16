@@ -25,11 +25,7 @@ export default function LoaderButton({
 
   return (
     <div className={classes.wrapper}>
-      <Button
-        disabled={disabled || isLoading}
-        className={classes.button}
-        {...props}
-      >
+      <Button disabled={disabled || isLoading} {...props}>
         {isLoading && (
           <CircularProgress size={24} className={classes.buttonProgress} />
         )}
