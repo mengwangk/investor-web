@@ -14,7 +14,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
-import FormHelperText from '@material-ui/core/FormHelperText'; 
+import FormHelperText from "@material-ui/core/FormHelperText";
+import { Auth } from "aws-amplify";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -67,15 +68,39 @@ export default function Signup() {
 
     setIsLoading(true);
 
-    setNewUser("test");
+    try {
+      const newUser = await Auth.signUp({
+        username: fields.email,
+        password: fields.password,
+      });
+      setIsLoading(false);
+      setNewUser(newUser);
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
 
-    setIsLoading(false);
+      // TODO
+      // Check for the UsernameExistsException in the handleSubmit function’s catch block.
+      // Use the Auth.resendSignUp() method to resend the code if the user has not been previously confirmed. Here is a link to the Amplify API docs.
+      // Confirm the code just as we did before.
+    }
   }
 
   async function handleConfirmationSubmit(event) {
     event.preventDefault();
 
     setIsLoading(true);
+
+    try {
+      await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+      await Auth.signIn(fields.email, fields.password);
+
+      userHasAuthenticated(true);
+      history.push("/");
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
+    }
   }
 
   function renderConfirmationForm() {
@@ -104,7 +129,9 @@ export default function Signup() {
                   value={fields.confirmationCode}
                   onChange={handleFieldChange}
                 />
-                <FormHelperText id="confirmation-helper-text">{t("signup.checkEmailForConfirmation")}</FormHelperText>
+                <FormHelperText id="confirmation-helper-text">
+                  {t("signup.checkEmailForConfirmation")}
+                </FormHelperText>
               </Grid>
             </Grid>
             <LoaderButton
@@ -212,6 +239,9 @@ export default function Signup() {
     );
   }
 
-  // {newUser === null ? renderForm() : renderConfirmationForm()}
-  return <div className="Signup">{renderConfirmationForm()}</div>;
+  return (
+    <div className="Signup">
+      {newUser === null ? renderForm() : renderConfirmationForm()}
+    </div>
+  );
 }
