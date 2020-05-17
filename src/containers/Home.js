@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useAppContext } from "../libs/contextLib";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -52,18 +53,28 @@ export default function Home() {
   const { isAuthenticated } = useAppContext();
 
   function renderActions() {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       return (
         <div className={classes.heroButtons}>
           <Grid container spacing={2} justify="center">
             <Grid item>
-              <Button variant="contained" color="primary">
-                Main call to action
+              <Button
+                variant="contained"
+                color="primary"
+                component={RouterLink}
+                to="/signup"
+              >
+                {t("account.signup")}
               </Button>
             </Grid>
             <Grid item>
-              <Button variant="outlined" color="primary">
-                Secondary action
+              <Button
+                variant="outlined"
+                component={RouterLink}
+                color="primary"
+                to="/login"
+              >
+                {t("account.login")}
               </Button>
             </Grid>
           </Grid>
