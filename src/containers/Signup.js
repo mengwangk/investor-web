@@ -7,8 +7,6 @@ import { onError } from "../libs/errorLib";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -16,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
+import FormHelperText from '@material-ui/core/FormHelperText'; 
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -80,7 +79,56 @@ export default function Signup() {
   }
 
   function renderConfirmationForm() {
-    return <form onSubmit={handleConfirmationSubmit}></form>;
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            {t("signup.confirmation")}
+          </Typography>
+          <form className={classes.form} onSubmit={handleConfirmationSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t("signup.confirmationCode")}
+                  required
+                  fullWidth
+                  id="confirmationCode"
+                  name="confirmationCode"
+                  type="tel"
+                  autoFocus
+                  value={fields.confirmationCode}
+                  onChange={handleFieldChange}
+                />
+                <FormHelperText id="confirmation-helper-text">{t("signup.checkEmailForConfirmation")}</FormHelperText>
+              </Grid>
+            </Grid>
+            <LoaderButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              isLoading={isLoading}
+              disabled={!validateConfirmationForm()}
+            >
+              {t("signup.verify")}
+            </LoaderButton>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {t("signup.alreadyHaveAccount")}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
+    );
   }
 
   function renderForm() {
@@ -135,8 +183,8 @@ export default function Signup() {
                   type="password"
                   id="confirmPassword"
                   autoComplete="current-password"
-                  onChange={handleFieldChange}
                   value={fields.confirmPassword}
+                  onChange={handleFieldChange}
                 />
               </Grid>
             </Grid>
@@ -146,6 +194,8 @@ export default function Signup() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              isLoading={isLoading}
+              disabled={!validateForm()}
             >
               {t("signup.signup")}
             </LoaderButton>
@@ -162,9 +212,6 @@ export default function Signup() {
     );
   }
 
-  return (
-    <div className="Signup">
-      {newUser === null ? renderForm() : renderConfirmationForm()}
-    </div>
-  );
+  // {newUser === null ? renderForm() : renderConfirmationForm()}
+  return <div className="Signup">{renderConfirmationForm()}</div>;
 }

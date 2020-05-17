@@ -27,6 +27,10 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "signup": "Register",
-    "alreadyHaveAccount": "Already have an account? Sign in"
+    "alreadyHaveAccount": "Already have an account? Sign in",
+    "confirmationCode": "Confirmation Code",
+    "confirmation": "Confirmation",
+    "checkEmailForConfirmation": "Please check your email for the code.",
+    "verify": "Verify"
   }
 }
