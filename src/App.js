@@ -112,7 +112,7 @@ function Page() {
           >
             <Routes />
           </AppContext.Provider>
-          <Box pt={4}>
+          <Box pt={4} pb={4}>
             <Copyright />
           </Box>
         </Container>
