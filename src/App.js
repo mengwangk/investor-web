@@ -60,7 +60,7 @@ function Page() {
 
   async function handleLogout() {
     await Auth.signOut();
-  
+
     userHasAuthenticated(false);
     history.push("/login");
   }
@@ -91,9 +91,14 @@ function Page() {
             </Typography>
 
             {isAuthenticated ? (
-              <Button color="inherit" onClick={handleLogout}>
-                {t("account.logout")}
-              </Button>
+              <>
+                <Button color="inherit" component={RouterLink} to="/settings">
+                  {t("account.settings")}
+                </Button>
+                <Button color="inherit" onClick={handleLogout}>
+                  {t("account.logout")}
+                </Button>
+              </>
             ) : (
               <>
                 <Button color="inherit" component={RouterLink} to="/signup">
