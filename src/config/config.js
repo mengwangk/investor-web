@@ -1,4 +1,5 @@
 const dev = {
+  STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
   DEBUG: true,
   apiGateway: {
     REGION: "ap-southeast-1",
@@ -16,6 +17,7 @@ const dev = {
 };
 
 const prod = {
+  STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
   DEBUG: false,
   apiGateway: {
     REGION: "ap-southeast-1",
