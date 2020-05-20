@@ -1,6 +1,6 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route, Switch } from "react-router-dom";
-import asyncComponent from "../components/AsyncComponent";
+// import asyncComponent from "../components/AsyncComponent";
 import AuthenticatedRoute from "../components/AuthenticatedRoute";
 import UnauthenticatedRoute from "../components/UnauthenticatedRoute";
 
@@ -10,11 +10,11 @@ import UnauthenticatedRoute from "../components/UnauthenticatedRoute";
 // import Signup from "../containers/Signup";
 // import Settings from "../containers/Settings";
 
-const AsyncHome = asyncComponent(() => import("../containers/Home"));
-const AsyncNotFound = asyncComponent(() => import("../containers/NotFound"));
-const AsyncLogin = asyncComponent(() => import("../containers/Login"));
-const AsyncSignup = asyncComponent(() => import("../containers/Signup"));
-const AsyncSettings = asyncComponent(() => import("../containers/Settings"));
+const AsyncHome = lazy(() => import("../containers/Home"));
+const AsyncNotFound = lazy(()  => import("../containers/NotFound"));
+const AsyncLogin = lazy(() => import("../containers/Login"));
+const AsyncSignup =  lazy(() => import("../containers/Signup"));
+const AsyncSettings = lazy(() => import("../containers/Settings"));
 
 export default function Routes() {
   return (
