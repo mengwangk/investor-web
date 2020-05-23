@@ -1,4 +1,5 @@
 import * as Sentry from "@sentry/browser";
+import config from "../config/config"
 
 const isLocal = process.env.NODE_ENV === "development";
 
@@ -7,7 +8,7 @@ export function initSentry() {
     return;
   }
 
-  Sentry.init({ dsn: "https://your-dsn-id-here@sentry.io/123456" });
+  Sentry.init({ dsn: config.SENTRY_DSN });
 }
 
 export function logError(error, errorInfo = null) {
@@ -34,6 +35,8 @@ export function onError(error) {
   } else if (error.config && error.config.url) {
     errorInfo.url = error.config.url;
   }
+
+  logError(error, errorInfo);
 
   alert(message);
 }

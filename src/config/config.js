@@ -1,5 +1,6 @@
 const dev = {
   STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
+  SENTRY_DSN: "https://c406111b8db64b40a2be1659689eb1a2@o384252.ingest.sentry.io/5247935",
   DEBUG: true,
   apiGateway: {
     REGION: "ap-southeast-1",
@@ -18,6 +19,7 @@ const dev = {
 
 const prod = {
   STRIPE_KEY: "YOUR_STRIPE_PUBLIC_KEY",
+  SENTRY_DSN: "https://7e799a2b29b94cef88008ce6798d3b1a@o384252.ingest.sentry.io/5251120",
   DEBUG: false,
   apiGateway: {
     REGION: "ap-southeast-1",
