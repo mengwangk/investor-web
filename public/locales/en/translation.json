@@ -5,6 +5,8 @@
     "profile": "Profile",
     "signup": "Register",
     "login": "Login",
+    "changeEmail": "Change Email",
+    "changePassword": "Change Password",
     "logout": "Logout",
     "settings": "settings"
   },
