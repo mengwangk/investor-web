@@ -14,7 +14,8 @@
     "link": "https://github.com/mengwangk/investor"
   },
   "error": {
-    "pageNotFound": "Sorry, page not found!"
+    "pageNotFound": "Sorry, page not found!",
+    "loadingPage" : "Sorry there was a problem loading this page"
   },
   "login": {
     "email" : "Email Address",

@@ -18,6 +18,7 @@ import { Link as RouterLink, useHistory } from "react-router-dom";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 import { onError } from "./libs/errorLib";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,11 +113,14 @@ function Page() {
           </Toolbar>
         </AppBar>
         <Container maxWidth="lg">
-          <AppContext.Provider
-            value={{ isAuthenticated, userHasAuthenticated }}
-          >
-            <Routes />
-          </AppContext.Provider>
+          <ErrorBoundary>
+            {" "}
+            <AppContext.Provider
+              value={{ isAuthenticated, userHasAuthenticated }}
+            >
+              <Routes />
+            </AppContext.Provider>
+          </ErrorBoundary>
           <Box pt={4} pb={4}>
             <Copyright />
           </Box>

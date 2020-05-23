@@ -65,6 +65,7 @@ export default function Home() {
                 to="/signup"
               >
                 {t("account.signup")}
+                {isAuthenticated.no.no}
               </Button>
             </Grid>
             <Grid item>
