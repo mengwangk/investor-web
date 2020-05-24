@@ -5,6 +5,8 @@
     "profile": "Profile",
     "signup": "Register",
     "login": "Login",
+    "loginWithFacebook": "Login with Facebook",
+    "loginWithGoogle": "Login with Google",
     "changeEmail": "Change Email",
     "changePassword": "Change Password",
     "logout": "Logout",
