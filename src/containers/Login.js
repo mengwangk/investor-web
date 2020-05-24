@@ -8,6 +8,7 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import FacebookIcon from "@material-ui/icons/Facebook";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   login: {
-    margin: theme.spacing(1, 0,1),
+    margin: theme.spacing(1, 0, 1),
   },
 }));
 
@@ -86,6 +87,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.login}
+            startIcon={<FacebookIcon />}
           >
             {t("account.loginWithFacebook")}
           </LoaderButton>
