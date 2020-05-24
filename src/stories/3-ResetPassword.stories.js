@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import Login from "../containers/Login";
+import React from "react";
+import ResetPassword from "../containers/ResetPassword";
 import "../i18n/i18n";
-import { AppContext } from "../libs/contextLib";
 
 export default {
-  title: "Login",
-  component: Login,
+  title: "ResetPassword",
+  component: ResetPassword,
 };
 
-export const LoginForm = () => {
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
+export const ResetPasswordForm = () => {
   return (
-    <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-      <Login />
-    </AppContext.Provider>
+      <ResetPassword/>
   );
 };
