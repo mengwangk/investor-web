@@ -1,8 +1,15 @@
+import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
 
@@ -28,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResetPassword() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [fields, handleFieldChange] = useFormFields({
     code: "",
     email: "",
@@ -87,35 +95,47 @@ export default function ResetPassword() {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}></div>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            {t("account.changePassword")}
+          </Typography>
+          <form className={classes.form} onSubmit={handleSendCodeClick}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t("resetPassword.email")}
+                  required
+                  fullWidth
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  autoFocus
+                  value={fields.email}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+            </Grid>
+            <LoaderButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              isLoading={isSendingCode}
+              disabled={!validateCodeForm()}
+            >
+              {t("resetPassword.sendConfirmation")}
+            </LoaderButton>
+          </form>
+        </div>
       </Container>
     );
   }
-
-  // function renderRequestCodeForm() {
-  //   return (
-  //     <form onSubmit={handleSendCodeClick}>
-  //       <FormGroup bsSize="large" controlId="email">
-  //         <ControlLabel>Email</ControlLabel>
-  //         <FormControl
-  //           autoFocus
-  //           type="email"
-  //           value={fields.email}
-  //           onChange={handleFieldChange}
-  //         />
-  //       </FormGroup>
-  //       <LoaderButton
-  //         block
-  //         type="submit"
-  //         bsSize="large"
-  //         isLoading={isSendingCode}
-  //         disabled={!validateCodeForm()}
-  //       >
-  //         Send Confirmation
-  //       </LoaderButton>
-  //     </form>
-  //   );
-  // }
 
   // function renderConfirmationForm() {
   //   return (

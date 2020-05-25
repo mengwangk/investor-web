@@ -38,5 +38,9 @@
     "confirmation": "Confirmation",
     "checkEmailForConfirmation": "Please check your email for the code.",
     "verify": "Verify"
+  },
+  "resetPassword" : {
+    "sendConfirmation" : "Send Confirmation",
+    "email": "email"
   }
 }
