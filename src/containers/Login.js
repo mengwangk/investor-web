@@ -68,6 +68,9 @@ export default function Login() {
       if (e.name === "UserNotConfirmedException") {
         // TODO - check for user not confirmed exception
         // Send confirmation code and redirect
+        
+        // Resend confirmation
+        // await Auth.resendSignUp(fields.email);
         console.log(e);
       } else {
         onError(e.message);

@@ -2,14 +2,16 @@ import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link as RouterLink } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -138,6 +140,10 @@ export default function ResetPassword() {
     );
   }
 
+  function renderConfirmationForm() {
+    return <form onSubmit={handleConfirmClick}></form>;
+  }
+
   // function renderConfirmationForm() {
   //   return (
   //     <form onSubmit={handleConfirmClick}>
@@ -185,30 +191,22 @@ export default function ResetPassword() {
 
   function renderSuccessMessage() {
     return (
-<Container component="main" maxWidth="xs">
-  <CssBaseline />
-  <div className={classes.paper}>
-    <Avatar className={classes.avatar}>
-      <ThumbUpIcon/>
-    </Avatar>
-    <Typography variant="h6">
-      {t("resetPassword.passwordReset")}
-    </Typography>
-    <form className={classes.form} onSubmit={handleSendCodeClick}>
-      </form>
-     </div>
-     </Container>
-
-      // <div className="success">
-      //   <Glyphicon glyph="ok" />
-      //   <p>Your password has been reset.</p>
-      //   <p>
-      //     <Link to="/login">
-      //       Click here to login with your new credentials.
-      //     </Link>
-      //   </p>
-      // </div>
-
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <ThumbUpIcon />
+          </Avatar>
+          <Typography variant="h6">
+            {t("resetPassword.passwordReset")}
+          </Typography>
+          <Typography variant="h6">
+            <Link to="/login" component={RouterLink} variant="body2">
+              {t("resetPassword.loginNewCredentials")}
+            </Link>
+          </Typography>
+        </div>
+      </Container>
     );
   }
 
@@ -220,5 +218,5 @@ export default function ResetPassword() {
   //         : renderSuccessMessage()
   //   );
 
-  return renderSuccessMessage();
+  return renderConfirmationForm();
 }

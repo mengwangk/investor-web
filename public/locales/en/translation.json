@@ -42,6 +42,7 @@
   "resetPassword" : {
     "sendConfirmation" : "Send Confirmation",
     "email": "email",
-    "passwordReset": "Your password has been reset."
+    "passwordReset": "Your password has been reset.",
+    "loginNewCredentials": "Click here to login with your new credentials."
   }
 }
