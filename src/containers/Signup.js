@@ -76,13 +76,15 @@ export default function Signup() {
       setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {
-      if (e.name === "UsernameExistsException") {
-        await Auth.resendSignUp(fields.email);
-        setNewUser({ username: fields.email, password: fields.password });
-      } else {
-        onError(e);
-      }
+      onError(e);
       setIsLoading(false);
+      if (e.name === "UsernameExistsException") {
+        // Redirect to login page
+        history.push("/login");
+
+        // await Auth.resendSignUp(fields.email);
+        // setNewUser({ username: fields.email, password: fields.password });
+      }
     }
   }
 
@@ -116,6 +118,23 @@ export default function Signup() {
           </Typography>
           <form className={classes.form} onSubmit={handleConfirmationSubmit}>
             <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t("signup.email")}
+                  required
+                  fullWidth
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  autoFocus
+                  value={fields.email}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"

@@ -65,8 +65,10 @@ export default function Login() {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
     } catch (e) {
-      if (e.name == "UserNotConfirmedException") {
+      if (e.name === "UserNotConfirmedException") {
         // TODO - check for user not confirmed exception
+        // Send confirmation code and redirect
+        console.log(e);
       } else {
         onError(e.message);
         setIsLoading(false);
