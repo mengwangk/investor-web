@@ -65,6 +65,8 @@ export default function Login() {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
     } catch (e) {
+      // TODO - check for user not confirmed exception
+
       onError(e.message);
       setIsLoading(false);
     }

@@ -213,14 +213,12 @@ export default function ResetPassword() {
   }
 
   //   return (
-  //      <div className="ResetPassword">
-  //       {!codeSent
+  //       !codeSent
   //         ? renderRequestCodeForm()
   //         : !confirmed
   //         ? renderConfirmationForm()
-  //         : renderSuccessMessage()}
-  //     </div>
+  //         : renderSuccessMessage()
   //   );
 
-  return <div className="ResetPassword">{renderSuccessMessage()}</div>;
+  return renderSuccessMessage();
 }

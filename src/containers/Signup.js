@@ -76,13 +76,13 @@ export default function Signup() {
       setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {
-      onError(e);
+      if (e.name === "UsernameExistsException") {
+        await Auth.resendSignUp(fields.email);
+        setNewUser({ username: fields.email, password: fields.password });
+      } else {
+        onError(e);
+      }
       setIsLoading(false);
-
-      // TODO
-      // Check for the UsernameExistsException in the handleSubmit function’s catch block.
-      // Use the Auth.resendSignUp() method to resend the code if the user has not been previously confirmed. Here is a link to the Amplify API docs.
-      // Confirm the code just as we did before.
     }
   }
 
@@ -239,9 +239,5 @@ export default function Signup() {
     );
   }
 
-  return (
-    <div className="Signup">
-      {newUser === null ? renderForm() : renderConfirmationForm()}
-    </div>
-  );
+  return newUser === null ? renderForm() : renderConfirmationForm();
 }
