@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -182,19 +183,34 @@ export default function ResetPassword() {
   //   );
   // }
 
-  // function renderSuccessMessage() {
-  //   return (
-  //     <div className="success">
-  //       <Glyphicon glyph="ok" />
-  //       <p>Your password has been reset.</p>
-  //       <p>
-  //         <Link to="/login">
-  //           Click here to login with your new credentials.
-  //         </Link>
-  //       </p>
-  //     </div>
-  //   );
-  // }
+  function renderSuccessMessage() {
+    return (
+<Container component="main" maxWidth="xs">
+  <CssBaseline />
+  <div className={classes.paper}>
+    <Avatar className={classes.avatar}>
+      <ThumbUpIcon/>
+    </Avatar>
+    <Typography variant="h6">
+      {t("resetPassword.passwordReset")}
+    </Typography>
+    <form className={classes.form} onSubmit={handleSendCodeClick}>
+      </form>
+     </div>
+     </Container>
+
+      // <div className="success">
+      //   <Glyphicon glyph="ok" />
+      //   <p>Your password has been reset.</p>
+      //   <p>
+      //     <Link to="/login">
+      //       Click here to login with your new credentials.
+      //     </Link>
+      //   </p>
+      // </div>
+
+    );
+  }
 
   //   return (
   //      <div className="ResetPassword">
@@ -206,5 +222,5 @@ export default function ResetPassword() {
   //     </div>
   //   );
 
-  return <div className="ResetPassword">{renderRequestCodeForm()}</div>;
+  return <div className="ResetPassword">{renderSuccessMessage()}</div>;
 }

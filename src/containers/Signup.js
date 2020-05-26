@@ -1,21 +1,21 @@
+import Avatar from "@material-ui/core/Avatar";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Auth } from "aws-amplify";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
-import Avatar from "@material-ui/core/Avatar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { useTranslation } from "react-i18next";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import { Auth } from "aws-amplify";
+import { useFormFields } from "../libs/hooksLib";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -147,7 +147,7 @@ export default function Signup() {
             </LoaderButton>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/login" component={RouterLink} variant="body2">
                   {t("signup.alreadyHaveAccount")}
                 </Link>
               </Grid>
@@ -228,7 +228,7 @@ export default function Signup() {
             </LoaderButton>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/login" component={RouterLink} variant="body2">
                   {t("signup.alreadyHaveAccount")}
                 </Link>
               </Grid>

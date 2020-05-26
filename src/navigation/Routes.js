@@ -11,10 +11,11 @@ import UnauthenticatedRoute from "../components/UnauthenticatedRoute";
 // import Settings from "../containers/Settings";
 
 const AsyncHome = lazy(() => import("../containers/Home"));
-const AsyncNotFound = lazy(()  => import("../containers/NotFound"));
+const AsyncNotFound = lazy(() => import("../containers/NotFound"));
 const AsyncLogin = lazy(() => import("../containers/Login"));
-const AsyncSignup =  lazy(() => import("../containers/Signup"));
+const AsyncSignup = lazy(() => import("../containers/Signup"));
 const AsyncSettings = lazy(() => import("../containers/Settings"));
+const AsyncResetPassword = lazy(() => import("../containers/ResetPassword"));
 
 export default function Routes() {
   return (
@@ -31,6 +32,9 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/settings">
         <AsyncSettings />
       </AuthenticatedRoute>
+      <UnauthenticatedRoute exact path="/login/reset">
+        <AsyncResetPassword />
+      </UnauthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
       <Route>
         <AsyncNotFound />

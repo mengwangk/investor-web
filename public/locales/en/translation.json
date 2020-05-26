@@ -41,6 +41,7 @@
   },
   "resetPassword" : {
     "sendConfirmation" : "Send Confirmation",
-    "email": "email"
+    "email": "email",
+    "passwordReset": "Your password has been reset."
   }
 }
