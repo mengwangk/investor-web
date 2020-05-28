@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link as RouterLink } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,8 @@ export default function Settings() {
           variant="contained"
           color="primary"
           className={classes.action}
+          to="/settings/email"
+          component={RouterLink} 
         >
           {t("account.changeEmail")}
         </LoaderButton>
@@ -40,6 +43,8 @@ export default function Settings() {
           variant="contained"
           color="primary"
           className={classes.action}
+          to="/settings/password"
+          component={RouterLink} 
         >
           {t("account.changePassword")}
         </LoaderButton>
