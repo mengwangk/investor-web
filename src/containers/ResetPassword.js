@@ -152,65 +152,66 @@ export default function ResetPassword() {
           <Typography component="h1" variant="h5">
             {t("account.resetPassword")}
           </Typography>
-          <form onSubmit={handleConfirmClick}></form>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                label={t("resetPassword.confirmationCode")}
-                required
-                fullWidth
-                id="code"
-                name="code"
-                type="tel"
-                autoFocus
-                value={fields.code}
-                onChange={handleFieldChange}
-              />
-              <FormHelperText id="confirmation-helper-text">
-                {t("resetPassword.checkEmailForConfirmation", { fields })}
-              </FormHelperText>
+          <form onSubmit={handleConfirmClick}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t("resetPassword.confirmationCode")}
+                  required
+                  fullWidth
+                  id="code"
+                  name="code"
+                  type="tel"
+                  autoFocus
+                  value={fields.code}
+                  onChange={handleFieldChange}
+                />
+                <FormHelperText id="confirmation-helper-text">
+                  {t("resetPassword.checkEmailForConfirmation", { fields })}
+                </FormHelperText>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label={t("resetPassword.password")}
+                  name="password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={fields.password}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label={t("resetPassword.confirmPassword")}
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="current-password"
+                  value={fields.confirmPassword}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                label={t("resetPassword.password")}
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={fields.password}
-                onChange={handleFieldChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="confirmPassword"
-                label={t("resetPassword.confirmPassword")}
-                type="password"
-                id="confirmPassword"
-                autoComplete="current-password"
-                value={fields.confirmPassword}
-                onChange={handleFieldChange}
-              />
-            </Grid>
-          </Grid>
-          <LoaderButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            isLoading={isConfirming}
-            disabled={!validateResetForm()}
-          >
-            {t("resetPassword.confirm")}
-          </LoaderButton>
+            <LoaderButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              isLoading={isConfirming}
+              disabled={!validateResetForm()}
+            >
+              {t("resetPassword.confirm")}
+            </LoaderButton>
+          </form>
         </div>
       </Container>
     );
