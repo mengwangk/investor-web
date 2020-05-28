@@ -1,6 +1,7 @@
 import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
@@ -103,7 +104,7 @@ export default function ResetPassword() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {t("account.changePassword")}
+            {t("account.resetPassword")}
           </Typography>
           <form className={classes.form} onSubmit={handleSendCodeClick}>
             <Grid container spacing={2}>
@@ -141,7 +142,95 @@ export default function ResetPassword() {
   }
 
   function renderConfirmationForm() {
-    return <form onSubmit={handleConfirmClick}></form>;
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            {t("account.resetPassword")}
+          </Typography>
+          <form onSubmit={handleConfirmClick}></form>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t("resetPassword.email")}
+                  required
+                  fullWidth
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  autoFocus
+                  value={fields.email}
+                  InputProps={{
+                    readOnly: true
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  label={t("resetPassword.confirmationCode")}
+                  required
+                  fullWidth
+                  id="code"
+                  name="code"
+                  type="tel"
+                  autoFocus
+                  value={fields.code}
+                  onChange={handleFieldChange}
+                />
+                <FormHelperText id="confirmation-helper-text">
+                  {t("resetPassword.checkEmailForConfirmation")}
+                </FormHelperText>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label={t("signup.password")}
+                  name="password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={fields.password}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label={t("signup.confirmPassword")}
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="current-password"
+                  value={fields.confirmPassword}
+                  onChange={handleFieldChange}
+                />
+              </Grid>
+            </Grid>
+            <LoaderButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              isLoading={isConfirming}
+              disabled={!validateResetForm()}
+            >
+              {t("resetPassword.confirm")}
+            </LoaderButton>
+        </div>
+      </Container>
+    );
   }
 
   // function renderConfirmationForm() {

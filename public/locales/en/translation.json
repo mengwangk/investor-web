@@ -9,6 +9,7 @@
     "loginWithGoogle": "Login with Google",
     "changeEmail": "Change Email",
     "changePassword": "Change Password",
+    "resetPassword": "Reset Password",
     "logout": "Logout",
     "settings": "settings"
   },
@@ -43,6 +44,9 @@
     "sendConfirmation" : "Send Confirmation",
     "email": "email",
     "passwordReset": "Your password has been reset.",
-    "loginNewCredentials": "Click here to login with your new credentials."
+    "loginNewCredentials": "Click here to login with your new credentials.",
+    "confirm": "Confirm",
+    "checkEmailForConfirmation": "Please check your email ({fields.email}) for the confirmation code.",
+    "confirmationCode": "Confirmation Code"
   }
 }
