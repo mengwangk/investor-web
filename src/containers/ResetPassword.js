@@ -153,130 +153,68 @@ export default function ResetPassword() {
             {t("account.resetPassword")}
           </Typography>
           <form onSubmit={handleConfirmClick}></form>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  label={t("resetPassword.email")}
-                  required
-                  fullWidth
-                  id="email"
-                  name="email"
-                  autoComplete="email"
-                  type="email"
-                  autoFocus
-                  value={fields.email}
-                  InputProps={{
-                    readOnly: true
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  label={t("resetPassword.confirmationCode")}
-                  required
-                  fullWidth
-                  id="code"
-                  name="code"
-                  type="tel"
-                  autoFocus
-                  value={fields.code}
-                  onChange={handleFieldChange}
-                />
-                <FormHelperText id="confirmation-helper-text">
-                  {t("resetPassword.checkEmailForConfirmation")}
-                </FormHelperText>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  label={t("signup.password")}
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={fields.password}
-                  onChange={handleFieldChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="confirmPassword"
-                  label={t("signup.confirmPassword")}
-                  type="password"
-                  id="confirmPassword"
-                  autoComplete="current-password"
-                  value={fields.confirmPassword}
-                  onChange={handleFieldChange}
-                />
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                label={t("resetPassword.confirmationCode")}
+                required
+                fullWidth
+                id="code"
+                name="code"
+                type="tel"
+                autoFocus
+                value={fields.code}
+                onChange={handleFieldChange}
+              />
+              <FormHelperText id="confirmation-helper-text">
+                {t("resetPassword.checkEmailForConfirmation", { fields })}
+              </FormHelperText>
             </Grid>
-            <LoaderButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              isLoading={isConfirming}
-              disabled={!validateResetForm()}
-            >
-              {t("resetPassword.confirm")}
-            </LoaderButton>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                label={t("resetPassword.password")}
+                name="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={fields.password}
+                onChange={handleFieldChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="confirmPassword"
+                label={t("resetPassword.confirmPassword")}
+                type="password"
+                id="confirmPassword"
+                autoComplete="current-password"
+                value={fields.confirmPassword}
+                onChange={handleFieldChange}
+              />
+            </Grid>
+          </Grid>
+          <LoaderButton
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            isLoading={isConfirming}
+            disabled={!validateResetForm()}
+          >
+            {t("resetPassword.confirm")}
+          </LoaderButton>
         </div>
       </Container>
     );
   }
-
-  // function renderConfirmationForm() {
-  //   return (
-  //     <form onSubmit={handleConfirmClick}>
-  //       <FormGroup bsSize="large" controlId="code">
-  //         <ControlLabel>Confirmation Code</ControlLabel>
-  //         <FormControl
-  //           autoFocus
-  //           type="tel"
-  //           value={fields.code}
-  //           onChange={handleFieldChange}
-  //         />
-  //         <HelpBlock>
-  //           Please check your email ({fields.email}) for the confirmation code.
-  //         </HelpBlock>
-  //       </FormGroup>
-  //       <hr />
-  //       <FormGroup bsSize="large" controlId="password">
-  //         <ControlLabel>New Password</ControlLabel>
-  //         <FormControl
-  //           type="password"
-  //           value={fields.password}
-  //           onChange={handleFieldChange}
-  //         />
-  //       </FormGroup>
-  //       <FormGroup bsSize="large" controlId="confirmPassword">
-  //         <ControlLabel>Confirm Password</ControlLabel>
-  //         <FormControl
-  //           type="password"
-  //           value={fields.confirmPassword}
-  //           onChange={handleFieldChange}
-  //         />
-  //       </FormGroup>
-  //       <LoaderButton
-  //         block
-  //         type="submit"
-  //         bsSize="large"
-  //         isLoading={isConfirming}
-  //         disabled={!validateResetForm()}
-  //       >
-  //         Confirm
-  //       </LoaderButton>
-  //     </form>
-  //   );
-  // }
 
   function renderSuccessMessage() {
     return (
@@ -299,13 +237,9 @@ export default function ResetPassword() {
     );
   }
 
-  //   return (
-  //       !codeSent
-  //         ? renderRequestCodeForm()
-  //         : !confirmed
-  //         ? renderConfirmationForm()
-  //         : renderSuccessMessage()
-  //   );
-
-  return renderConfirmationForm();
+  return !codeSent
+    ? renderRequestCodeForm()
+    : !confirmed
+    ? renderConfirmationForm()
+    : renderSuccessMessage();
 }

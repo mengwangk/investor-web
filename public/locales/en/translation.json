@@ -46,7 +46,9 @@
     "passwordReset": "Your password has been reset.",
     "loginNewCredentials": "Click here to login with your new credentials.",
     "confirm": "Confirm",
-    "checkEmailForConfirmation": "Please check your email ({fields.email}) for the confirmation code.",
-    "confirmationCode": "Confirmation Code"
+    "checkEmailForConfirmation": "Please check your email ({{fields.email}}) for the confirmation code.",
+    "confirmationCode": "Confirmation Code",
+    "password": "New Password",
+    "confirmPassword": "Confirm Password"
   }
 }
