@@ -10,6 +10,7 @@ import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
 
@@ -82,64 +83,65 @@ export default function ChangePassword() {
         <Typography component="h1" variant="h5">
           {t("account.changePassword")}
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={handleChangeClick}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                label={t("resetPassword.password")}
-                name="password"
+                label={t("changePassword.oldPassword")}
+                name="oldPassword"
+                id="oldPassword"
                 type="password"
-                id="password"
+                autoFocus
                 autoComplete="current-password"
+                onChange={handleFieldChange}
+                value={fields.oldPassword}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                label={t("changePassword.newPassword")}
+                name="password"
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                onChange={handleFieldChange}
+                value={fields.password}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                label={t("changePassword.confirmPassword")}
+                name="confirmPassword"
+                id="confirmPassword"
+                type="password"
+                autoComplete="current-password"
+                onChange={handleFieldChange}
+                value={fields.confirmPassword}
               />
             </Grid>
           </Grid>
+          <LoaderButton
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={!validateForm()}
+            isLoading={isChanging}
+          >
+            {t("changePassword.changePassword")}
+          </LoaderButton>
         </form>
       </div>
     </Container>
   );
 }
-
-//   return (
-//     <div className="ChangePassword">
-//       <form onSubmit={handleChangeClick}>
-//         <FormGroup bsSize="large" controlId="oldPassword">
-//           <ControlLabel>Old Password</ControlLabel>
-//           <FormControl
-//             type="password"
-//             onChange={handleFieldChange}
-//             value={fields.oldPassword}
-//           />
-//         </FormGroup>
-//         <hr />
-//         <FormGroup bsSize="large" controlId="password">
-//           <ControlLabel>New Password</ControlLabel>
-//           <FormControl
-//             type="password"
-//             onChange={handleFieldChange}
-//             value={fields.password}
-//           />
-//         </FormGroup>
-//         <FormGroup bsSize="large" controlId="confirmPassword">
-//           <ControlLabel>Confirm Password</ControlLabel>
-//           <FormControl
-//             type="password"
-//             onChange={handleFieldChange}
-//             value={fields.confirmPassword}
-//           />
-//         </FormGroup>
-//         <LoaderButton
-//           block
-//           type="submit"
-//           bsSize="large"
-//           disabled={!validateForm()}
-//           isLoading={isChanging}
-//         >
-//           Change Password
-//         </LoaderButton>
-//       </form>
-//     </div>
-//   );

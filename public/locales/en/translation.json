@@ -50,5 +50,11 @@
     "confirmationCode": "Confirmation Code",
     "password": "New Password",
     "confirmPassword": "Confirm Password"
+  },
+  "changePassword": {
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "changePassword": "Change Password"
   }
 }
