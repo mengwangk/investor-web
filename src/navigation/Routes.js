@@ -17,6 +17,7 @@ const AsyncSignup = lazy(() => import("../containers/Signup"));
 const AsyncSettings = lazy(() => import("../containers/Settings"));
 const AsyncResetPassword = lazy(() => import("../containers/ResetPassword"));
 const AsyncChangePassword = lazy(() => import("../containers/ChangePassword"));
+const AsyncChangeEmail = lazy(() => import("../containers/ChangeEmail"));
 
 export default function Routes() {
   return (
@@ -38,6 +39,9 @@ export default function Routes() {
       </UnauthenticatedRoute>
       <AuthenticatedRoute exact path="/settings/password">
         <AsyncChangePassword />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/settings/email">
+        <AsyncChangeEmail />
       </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
       <Route>

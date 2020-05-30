@@ -56,5 +56,12 @@
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
     "changePassword": "Change Password"
+  },
+  "changeEmail" : {
+    "updateEmail" : "Update Email",
+    "email" : "Email",
+    "confirmationCode": "Confirmation Code",
+    "checkEmailForConfirmation": "Please check your email ({{fields.email}}) for the confirmation code.",
+    "confirm": "Confirm"
   }
 }
