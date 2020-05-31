@@ -14,6 +14,7 @@ import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
+import GoogleIcon from "../components/GoogleIcon";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
@@ -68,7 +69,7 @@ export default function Login() {
       if (e.name === "UserNotConfirmedException") {
         // TODO - check for user not confirmed exception
         // Send confirmation code and redirect
-        
+
         // Resend confirmation
         // await Auth.resendSignUp(fields.email);
         console.log(e);
@@ -100,17 +101,16 @@ export default function Login() {
           >
             {t("account.loginWithFacebook")}
           </LoaderButton>
-
           <LoaderButton
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.login}
+            startIcon={<GoogleIcon />}
           >
             {t("account.loginWithGoogle")}
           </LoaderButton>
-
           <TextField
             variant="outlined"
             margin="normal"
