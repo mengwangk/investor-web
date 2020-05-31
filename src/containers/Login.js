@@ -8,12 +8,12 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import FacebookIcon from "@material-ui/icons/Facebook";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
+import FacebookButton from "../components/FacebookButton";
 import GoogleIcon from "../components/GoogleIcon";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
@@ -57,6 +57,10 @@ export default function Login() {
     return fields.email.length > 0 && fields.password.length > 0;
   }
 
+  function handleFbLogin() {
+    userHasAuthenticated(true);
+  }
+  
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -91,16 +95,7 @@ export default function Login() {
           {t("account.login")}
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <LoaderButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.login}
-            startIcon={<FacebookIcon />}
-          >
-            {t("account.loginWithFacebook")}
-          </LoaderButton>
+          <FacebookButton onLogin={handleFbLogin} />
           <LoaderButton
             type="submit"
             fullWidth

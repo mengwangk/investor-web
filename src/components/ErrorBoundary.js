@@ -1,14 +1,15 @@
-import React from "react";
-import { logError } from "../libs/errorLib";
+import { makeStyles } from "@material-ui/core/styles";
 import withStyles from "@material-ui/styles/withStyles";
+import React from "react";
 import { withTranslation } from "react-i18next";
+import { logError } from "../libs/errorLib";
 
-const styles = theme => ({
+const styles = makeStyles((theme) => ({
   root: {
     textAlign: "center",
     paddingTop: "100px",
   }
-});
+}));
 
 export class ErrorBoundary extends React.Component {
   state = { hasError: false };
